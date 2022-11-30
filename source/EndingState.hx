@@ -27,6 +27,11 @@ class EndingState extends MusicBeatState
 		FlxG.sound.playMusic(Paths.music(_song),1,true);
 		add(end);
 		FlxG.camera.fade(FlxColor.BLACK, 0.8, true);	
+	
+	#if android	
+	addVirtualPad(NONE, A);
+	#end
+	
 	}
 	
 	override public function update(elapsed:Float):Void 
