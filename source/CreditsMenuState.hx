@@ -557,6 +557,11 @@ class CreditsMenuState extends MusicBeatState
             }});
          }});
       }
+		#if android
+	addVirtualPad(UP_DOWN, A_B);
+	addPadCamera();		
+	#end
+	
 		super.create();
 	}
    
