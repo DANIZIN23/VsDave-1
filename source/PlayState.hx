@@ -2317,12 +2317,12 @@ class PlayState extends MusicBeatState
 	{
 		inCutscene = true;
 
-		video = new VideoHandler();
-		video.finishCallback = function()
+		
+		
 		{
 			LoadingState.loadAndSwitchState(new PlayState());
 		}
-		video.playVideo(Paths.video(name));
+		
 	}
 
 	var previousFrameTime:Int = 0;
