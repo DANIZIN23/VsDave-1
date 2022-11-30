@@ -1324,7 +1324,11 @@ class PlayState extends MusicBeatState
 			iconP2.y = healthBar.y - (iconP2.height / 2);
 			add(iconP2);
 		}
-		strumLineNotes.cameras = [camHUD];
+		#if android
+                addAndroidControls();
+		androidControls.visible = true;		
+                #end
+                strumLineNotes.cameras = [camHUD];
 		notes.cameras = [camHUD];
 		healthBar.cameras = [camHUD];
 		healthBarBG.cameras = [camHUD];
