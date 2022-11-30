@@ -146,6 +146,11 @@ class GameOverPolygonizedSubState extends MusicBeatSubstate
 	{
 		super.update(elapsed);
 
+		#if android
+		addVirtualPad(NONE, A_B);
+		addPadCamera();	
+		#end
+		
 		#if SHADERS_ENABLED
 		voidShader.shader.uTime.value[0] += elapsed;
 		#end
