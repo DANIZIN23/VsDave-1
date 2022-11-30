@@ -311,10 +311,10 @@ class Controls extends FlxActionSet
 	public function setVirtualPadUI(VirtualPad:FlxVirtualPad, DPad:FlxDPadMode, Action:FlxActionMode)
 	{
 		
-		{
+		
 			
-			case NONE: // do nothing
-		}
+			
+		
 
 		switch (Action)
 		{
