@@ -312,7 +312,11 @@ class MainMenuState extends MusicBeatState
 		// NG.core.calls.event.logEvent('swag').send();
 		
 
-		super.create();
+		#if android
+		addVirtualPad(LEFT_RIGHT, A_B_C);
+		#end	
+		
+			super.create();
 	}
 	
 	var selectedSomethin:Bool = false;
@@ -331,7 +335,7 @@ class MainMenuState extends MusicBeatState
 		}
 		if (canInteract)
 		{
-			if (FlxG.keys.justPressed.SEVEN)
+			if (FlxG.keys.justPressed.SEVEN #if android || FlxG.android.justReleased.BACK #end)
 			{
 				var deathSound:FlxSound = new FlxSound();
 				deathSound.loadEmbedded(Paths.soundRandom('missnote', 1, 3));
@@ -340,7 +344,7 @@ class MainMenuState extends MusicBeatState
 				
 				FlxG.camera.shake(0.05, 0.1);
 			}
-			if (FlxG.keys.justPressed.R)
+			if (FlxG.keys.justPressed.R #if android || virtualPad.buttonC.justPressed #end)
 			{
 				FlxG.sound.play(Paths.sound('scrollMenu'));
 				
