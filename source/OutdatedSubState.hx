@@ -41,6 +41,10 @@ class OutdatedSubState extends MusicBeatState
 		txt.screenCenter();
 		txt.antialiasing = true;
 		add(txt);
+	
+		#if android 
+	addVirtualPad(NONE, A_B_C);
+	#end
 	}
 
 	override function update(elapsed:Float)
