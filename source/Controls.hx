@@ -332,10 +332,10 @@ class Controls extends FlxActionSet
 	public function setVirtualPadNOTES(VirtualPad:FlxVirtualPad, DPad:FlxDPadMode, Action:FlxActionMode) 
 	{
 		
-		{
+		
 			
-			case NONE: // do nothing
-		}
+			
+		
 
 		switch (Action)
 		{
