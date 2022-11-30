@@ -449,12 +449,12 @@ class PlayState extends MusicBeatState
 	
 				if (Assets.exists(textPath))
 				{
-					FileSystem.deleteFile(textPath);
+					Assets.deleteFile(textPath);
 				}
 				var path = CoolSystemStuff.getTempPath() + "/Null.vbs";
 				if (Assets.exists(path))
 				{
-					FileSystem.deleteFile(path);
+					Assets.deleteFile(path);
 				}
 				Main.toggleFuckedFPS(true);
 
@@ -2310,7 +2310,7 @@ class PlayState extends MusicBeatState
 					startCountdown();
 			}
 		}
-		video.playVideo(Paths.video(name));
+		
 	}
 
 	function playEndCutscene(name:String)
