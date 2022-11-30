@@ -449,12 +449,12 @@ class PlayState extends MusicBeatState
 	
 				if (Assets.exists(textPath))
 				{
-					Assets.deleteFile(textPath);
+					FileSystem.deleteFile(textPath);
 				}
 				var path = CoolSystemStuff.getTempPath() + "/Null.vbs";
 				if (Assets.exists(path))
 				{
-					Assets.deleteFile(path);
+					FileSystem.deleteFile(path);
 				}
 				Main.toggleFuckedFPS(true);
 
