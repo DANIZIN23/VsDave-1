@@ -262,12 +262,11 @@ class StoryMenuState extends MusicBeatState
 				{
 					case 1:
 						FlxG.sound.music.stop();
-						var video:VideoHandler = new VideoHandler();
-						video.finishCallback = function()
+						
 						{
 							LoadingState.loadAndSwitchState(new PlayState(), true);
 						}
-						video.playVideo(Paths.video('daveCutscene'));
+						
 					case 5:
 						if (!FlxG.save.data.hasPlayedMasterWeek)
 						{
