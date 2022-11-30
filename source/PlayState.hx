@@ -6,7 +6,7 @@ import flixel.graphics.frames.FlxFrame;
 import flixel.graphics.FlxGraphic;
 import flixel.addons.transition.Transition;
 import flixel.group.FlxGroup;
-#if desktop
+#if (desktop || android)
 import sys.FileSystem;
 #end
 import flixel.util.FlxArrayUtil;
