@@ -3,8 +3,8 @@ package;
 import flixel.FlxG;
 import flixel.graphics.frames.FlxAtlasFrames;
 import openfl.utils.AssetType;
-import openfl.utils.Assets as OpenFlAssets;
-#if sys import sys.FileSystem; #end
+import openfl.utils.Assets;
+
 
 class Paths
 {
@@ -34,11 +34,11 @@ class Paths
 		if (currentLevel != null)
 		{
 			var levelPath = getLibraryPathForce(file, currentLevel);
-			if (OpenFlAssets.exists(levelPath, type))
+			if (Assets.exists(levelPath, type))
 				return levelPath;
 
 			levelPath = getLibraryPathForce(file, "shared");
-			if (OpenFlAssets.exists(levelPath, type))
+			if (Assets.exists(levelPath, type))
 				return levelPath;
 		}
 
@@ -91,7 +91,7 @@ class Paths
 		if (isLocale())
 		{
 			var langaugeReturnPath = getPath('locale/${LanguageManager.save.data.language}/data/$key.txt', TEXT, library);
-			if (FileSystem.exists(langaugeReturnPath))
+			if (Assets.exists(langaugeReturnPath))
 			{
 				return langaugeReturnPath;
 			}
@@ -167,7 +167,7 @@ class Paths
 		if (isLocale())
 		{
 			var langaugeReturnPath = getPath('locale/${LanguageManager.save.data.language}/images/$key.png', IMAGE, library);
-			if (FileSystem.exists(langaugeReturnPath))
+			if (Assets.exists(langaugeReturnPath))
 			{
 				return langaugeReturnPath;
 			}
