@@ -199,8 +199,8 @@ class OptionsMenu extends MusicBeatState
 					FlxG.save.data.disableFps = !FlxG.save.data.disableFps;
 					Main.fps.visible = !FlxG.save.data.disableFps;
 					updateGroupControls(FlxG.save.data.disableFps ? LanguageManager.getTextString('option_enable_fps') : LanguageManager.getTextString('option_disable_fps'), 10, 'Vertical');
-				case 11:
-					openSubState(new AndroidControlsSubState());
+				
+					
 					 
 			}
 		}
