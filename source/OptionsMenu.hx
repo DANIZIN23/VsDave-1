@@ -112,6 +112,10 @@ class OptionsMenu extends MusicBeatState
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 
+		#if android
+		addVirtualPad(LEFT_FULL, A_B);
+		#end	
+		
 		super.create();
 	}
 
@@ -196,8 +200,8 @@ class OptionsMenu extends MusicBeatState
 					Main.fps.visible = !FlxG.save.data.disableFps;
 					updateGroupControls(FlxG.save.data.disableFps ? LanguageManager.getTextString('option_enable_fps') : LanguageManager.getTextString('option_disable_fps'), 10, 'Vertical');
 				case 11:
-					CompatTool.save.data.compatMode = !CompatTool.save.data.compatMode;
-					updateGroupControls(CompatTool.save.data.compatMode ? LanguageManager.getTextString('option_enable_compat') : LanguageManager.getTextString('option_disable_compat'), 11, 'Vertical');
+					openSubState(new AndroidControlsSubState());
+					 
 			}
 		}
 	}
