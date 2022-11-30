@@ -409,6 +409,14 @@ class TerminalState extends MusicBeatState
             return;
         }
 
+       #if android
+		for (touch in FlxG.touches.list)
+		{
+			if (touch.overlaps(displayText) && touch.justPressed)
+				FlxG.stage.window.textInputEnabled = true;
+		}
+		#end
+       
         if (keyJustPressed != FlxKey.NONE)
         {
             if (keyJustPressed == FlxKey.BACKSPACE)
@@ -445,7 +453,7 @@ class TerminalState extends MusicBeatState
         {
             curCommand = "";
         }
-        if (FlxG.keys.justPressed.ESCAPE)
+        if (FlxG.keys.justPressed.ESCAPE #if android || (FlxG.android.justReleased.BACK && !FlxG.stage.window.textInputEnabled) #end)
         {
             Main.fps.visible = !FlxG.save.data.disableFps;
             FlxG.switchState(new MainMenuState());
