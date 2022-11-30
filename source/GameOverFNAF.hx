@@ -72,6 +72,11 @@ class GameOverFNAF extends MusicBeatSubstate
 
 	override function update(elapsed:Float)
 	{
+		#if android
+		addVirtualPad(NONE, B);
+		addPadCamera();	
+		#end
+		
 		super.update(elapsed);
 
 		if (controls.BACK)
