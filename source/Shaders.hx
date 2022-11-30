@@ -463,35 +463,111 @@ class DitherShader extends FlxShader
     // couldn't find a shadertoy link srry http://devlog-martinsh.blogspot.com/2011/03/glsl-8x8-bayer-matrix-dithering.html
     #if SHADERS_ENABLED
     @:glFragmentSource('
-        #pragma header
-        #extension GL_ARB_arrays_of_arrays : require
         // Ordered dithering aka Bayer matrix dithering
+        #pragma header
 
         float Scale = 1.0;
+        
+        void setDith(int x, float a[8])
+        {
+            if (x == 0) {
+                a[0] = 0.;
+                a[1] = 32.; 
+                a[2] = 8.;
+                a[3] = 40.;
+                a[4] = 2.;
+                a[5] = 34.;
+                a[6] = 10.;
+                a[7] = 42.; /* 8x8 Bayer ordered dithering */
+            }
+            if (x == 1) {
+            	a[0] = 48.;
+                a[1] = 16.;
+                a[2] = 56.;
+                a[3] = 24.;
+                a[4] = 50.;
+                a[5] = 18.;
+                a[6] = 58.;
+                a[7] = 26.; /* pattern. Each input pixel */
+            }
+            if (x == 2) {
+            	a[0] = 12.;
+                a[1] = 44.;
+                a[2] = 4.;
+                a[3] = 36.;
+                a[4] = 14.;
+                a[5] = 46.;
+                a[6] = 6.;
+                a[7] = 38.; /* is scaled to the 0..63 range */
+            }
+            if (x == 3) {
+            	a[0] = 60.;
+                a[1] = 28.;
+                a[2] = 52.;
+                a[3] = 20.;
+                a[4] = 62.;
+                a[5] = 30.;
+                a[6] = 54.;
+                a[7] = 22.; /* before looking in this table */
+            }
+            if (x == 4) {
+                a[0] = 3.;
+                a[1] = 35.;
+                a[2] = 11.;
+                a[3] = 43.;
+                a[4] = 1.;
+                a[5] = 33.;
+                a[6] = 9.;
+                a[7] = 41.; /* to determine the action. */
+            }
+            if (x == 5) {
+                a[0] = 51.;
+                a[1] = 19.;
+                a[2] = 59.;
+                a[3] = 27.;
+                a[4] = 49.;
+                a[5] = 17.;
+                a[6] = 57.;
+                a[7] = 25.;
+            }
+            if (x == 6) {
+                a[0] = 15.;
+                a[1] = 47.;
+                a[2] = 7.;
+                a[3] = 39.;
+                a[4] = 13.;
+                a[5] = 45.;
+                a[6] = 5.;
+                a[7] = 37.;
+            }
+            if (x == 7) {
+                a[0] = 63.;
+                a[1] = 31.;
+                a[2] = 55.;
+                a[3] = 23.;
+                a[4] = 61.;
+                a[5] = 29.;
+                a[6] = 53.;
+                a[7] = 21.;
+            }
+        }
 
         float find_closest(int x, int y, float c0)
         {
 
-        int dither[8][8] = {
-        { 0, 32, 8, 40, 2, 34, 10, 42}, /* 8x8 Bayer ordered dithering */
-        {48, 16, 56, 24, 50, 18, 58, 26}, /* pattern. Each input pixel */
-        {12, 44, 4, 36, 14, 46, 6, 38}, /* is scaled to the 0..63 range */
-        {60, 28, 52, 20, 62, 30, 54, 22}, /* before looking in this table */
-        { 3, 35, 11, 43, 1, 33, 9, 41}, /* to determine the action. */
-        {51, 19, 59, 27, 49, 17, 57, 25},
-        {15, 47, 7, 39, 13, 45, 5, 37},
-        {63, 31, 55, 23, 61, 29, 53, 21} };
+            float dither[8];
+            setDith(x, dither);
 
-        float limit = 0.0;
-        if(x < 8)
-        {
-            limit = (dither[x][y]+1)/64.0;
-        }
+            float limit = 0.0;
+            if(x < 8)
+            {
+                limit = (dither[y]+1.)/64.;
+            }
 
-
-        if(c0 < limit)
-            return 0.0;
-            return 1.0;
+            if(c0 < limit) {
+                return 0.0;
+                return 1.0;
+            }
         }
 
         void main(void)
@@ -500,7 +576,7 @@ class DitherShader extends FlxShader
             float grayscale = dot(texture2D(bitmap, openfl_TextureCoordv), lum);
             vec4 rgba = texture2D(bitmap, openfl_TextureCoordv).rgba;
 
-            vec2 xy = gl_FragCoord.xy * Scale;
+            vec2 xy = gl_FragCoord.xy * vec2(Scale);
             int x = int(mod(xy.x, 8.0));
             int y = int(mod(xy.y, 8.0));
 
