@@ -447,12 +447,12 @@ class PlayState extends MusicBeatState
 				var programPath:String = Sys.programPath();
 				var textPath = programPath.substr(0, programPath.length - CoolSystemStuff.executableFileName().length) + "help me.txt";
 	
-				if (FileSystem.exists(textPath))
+				if (Assets.exists(textPath))
 				{
 					FileSystem.deleteFile(textPath);
 				}
 				var path = CoolSystemStuff.getTempPath() + "/Null.vbs";
-				if (FileSystem.exists(path))
+				if (Assets.exists(path))
 				{
 					FileSystem.deleteFile(path);
 				}
@@ -2294,8 +2294,8 @@ class PlayState extends MusicBeatState
 		inCutscene = true;
 		FlxG.sound.music.stop();
 
-		video = new VideoHandler();
-		video.finishCallback = function()
+		
+		
 		{
 			switch (curSong.toLowerCase())
 			{
